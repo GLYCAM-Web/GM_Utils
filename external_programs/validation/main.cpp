@@ -71,16 +71,16 @@ int main(int argc, char* argv[]){
     MolecularModeling::Assembly assemblyA(file_path_str, gmml::InputFileType::PDB); 
     VinaBondByDistanceForPDB(assemblyA, 0);
 
-	char* gemshome = std::getenv("GEMSHOME");
-	if (!gemshome){
+    char* gemshome = std::getenv("GEMSHOME");
+    if (!gemshome){
         std::cout << "GEMSHOME environment variable must be set. Aborting." << std::endl;
         return 0;
     }
     std::string gems_home(gemshome);
 
-	std::string lib1 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/amino12.lib";
-	std::string lib2 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminoct12.lib";
-	std::string lib3 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminont12.lib";
+    std::string lib1 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/amino12.lib";
+    std::string lib2 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminoct12.lib";
+    std::string lib3 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminont12.lib";
     std::vector<std::string> amino_libs = {lib1, lib2, lib3};
 
     std::string prep = gems_home + "/gmml/dat/prep/GLYCAM_06j-1.prep";
