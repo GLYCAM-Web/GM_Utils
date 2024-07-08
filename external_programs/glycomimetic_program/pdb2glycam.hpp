@@ -28,6 +28,7 @@
 #include <iterator>
 
 std::map<std::string, int> max_neighbors_lookup_map = {{"C", 4}, {"N-nonterminal", 3}, {"N-terminal", 4}};
+std::ofstream pdb2glycam_log("pdb2glycam.log");
 
 bool is_terminal(MolecularModeling::Atom* atom){
     int num_heavy_atom_neighbors = 0;
@@ -86,7 +87,7 @@ void RemoveExtraHydrogensFromCarbon(MolecularModeling::Assembly& assembly){
 		} 
 
 		if (hydrogen_neighbors.size() < num_h_to_remove){
-		    std::cout << "Too many heavy atoms are bonded to atom " << assembly_atom->GetId() << std::endl;
+		    pdb2glycam_log << "Too many heavy atoms are bonded to atom " << assembly_atom->GetId() << std::endl;
 		    std::exit(1);
 		}
 
@@ -115,7 +116,7 @@ void RemoveExtraHydrogensFromCarbon(MolecularModeling::Assembly& assembly){
 		int num_h_removed = 0;
 		for (std::map<double, MolecularModeling::Atom*>::iterator mapit = min_distance_h_map.begin(); mapit != min_distance_h_map.end(); mapit++){
 		    MolecularModeling::Atom* h_to_remove = mapit->second;
-		    std::cout << "Removing redundant hydrogen atom " << h_to_remove->GetId();
+		    pdb2glycam_log << "Removing redundant hydrogen atom " << h_to_remove->GetId();
 		    //h_to_remove->GetResidue()->RemoveAtom(h_to_remove, true);
 
 		    AtomVector h_neighbors = h_to_remove->GetNode()->GetNodeNeighbors();
@@ -140,7 +141,7 @@ bool pdb2glycam_matching(std::string file_path, std::map<MolecularModeling::Atom
 		         std::vector<std::string>& amino_libs, std::string prep)
 {
     //pdb2glycam
-    std::cout << "Begin pdb2glycam" << std::endl;
+    pdb2glycam_log << "Begin pdb2glycam" << std::endl;
 
     MolecularModeling::Assembly assemblyA(file_path, file_type);
     if (file_type == gmml::InputFileType::PDBQT){
@@ -203,9 +204,9 @@ bool pdb2glycam_matching(std::string file_path, std::map<MolecularModeling::Atom
 
     for (std::map<Glycan::Oligosaccharide*, std::vector<MolecularModeling::Residue*> >::iterator mapit = oligo_residue_map.begin(); mapit != oligo_residue_map.end(); mapit++){
 	    std::vector<MolecularModeling::Residue*> res_vec = mapit->second;
-	    std::cout << "New oligo: " << std::endl;
+	    pdb2glycam_log << "New oligo: " << std::endl;
 	    for (unsigned int t = 0; t < res_vec.size(); t++){
-	        std::cout << res_vec[t]->GetName() << std::endl;
+	        pdb2glycam_log << res_vec[t]->GetName() << std::endl;
 	    }
     }
 
@@ -222,18 +223,18 @@ bool pdb2glycam_matching(std::string file_path, std::map<MolecularModeling::Atom
 
         if (all_isomorphisms.empty()){
             all_oligos_matched = false;
-            std::cout << "Oligosaccharide " << i+1 << " matching failed." << std::endl;
-            std::cout << "Here are the atoms that might be the issue:" << std::endl;
+            pdb2glycam_log << "Oligosaccharide " << i+1 << " matching failed." << std::endl;
+            pdb2glycam_log << "Here are the atoms that might be the issue:" << std::endl;
 
             int largest_iteration_length = this_oligo_match_tracker->largest_iteration_length;
-            std::cout << "Largest iteration length: " << largest_iteration_length << std::endl;
+            pdb2glycam_log << "Largest iteration length: " << largest_iteration_length << std::endl;
 
             std::vector<pdb2glycam_matching_fail_info*>& failures = this_oligo_match_tracker->failures;
             for (unsigned int j = 0; j < failures.size(); j++){
                 pdb2glycam_matching_fail_info* this_failure = failures[j];
                 if (this_failure->iteration_length == largest_iteration_length){
-                    std::cout << "Failed atom: " << this_failure->failed_atom->GetResidue()->GetName() << "-" << this_failure->failed_atom->GetName() << std::endl;
-                    std::cout << "Failure message: " << this_failure->failure_notice << std::endl << std::endl;
+                    pdb2glycam_log << "Failed atom: " << this_failure->failed_atom->GetResidue()->GetName() << "-" << this_failure->failed_atom->GetName() << std::endl;
+                    pdb2glycam_log << "Failure message: " << this_failure->failure_notice << std::endl << std::endl;
                 }
             }
  
@@ -253,17 +254,13 @@ bool pdb2glycam_matching(std::string file_path, std::map<MolecularModeling::Atom
         }
     }
 
-    std::ofstream pdb2glycam_log("pdb2glycam.log");
     if (!all_oligos_matched){
-        std::cout << "Pdb2glycam matching failed." << std::endl;
         pdb2glycam_log << "Pdb2glycam matching failed." << std::endl;
 	    return false;
     }
 
-    std::cout << "Pdb2glycam matching successful." << std::endl;
     pdb2glycam_log << "Pdb2glycam matching successful." << std::endl;
     pdb2glycam_log.close();
+    
     return true;
-//pdb2glycam
-
 } 
