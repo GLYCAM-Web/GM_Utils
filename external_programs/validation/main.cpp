@@ -16,8 +16,8 @@
 #include "includes/utils.hpp"
 #include "src/MolecularMetadata/guesses.cc"
 
-#include "../src/vina_bond_by_distance_for_pdb.hpp"
-#include "../src/pdb2glycam.hpp"
+#include "../glycomimetic_program/vina_bond_by_distance_for_pdb.hpp"
+#include "../glycomimetic_program/pdb2glycam.hpp"
 
 //#include "boost/tokenizer.hpp"
 #include <vector>
