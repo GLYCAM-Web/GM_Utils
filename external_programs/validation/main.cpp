@@ -1,3 +1,16 @@
+#include <vector>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <cmath>
+#include <cstdlib>
+#include <pthread.h>
+#include <iterator>
+#include <sstream>
+#include <functional> //std::greater
+//#include <boost/filesystem.hpp>
+//#include "boost/tokenizer.hpp"
 
 #include "includes/gmml.hpp"
 #include "includes/MolecularModeling/assembly.hpp"
@@ -19,19 +32,6 @@
 #include "../glycomimetic_program/vina_bond_by_distance_for_pdb.hpp"
 #include "../glycomimetic_program/pdb2glycam.hpp"
 
-//#include "boost/tokenizer.hpp"
-#include <vector>
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <cmath>
-#include <cstdlib>
-#include <pthread.h>
-#include <iterator>
-#include <sstream>
-//#include <boost/filesystem.hpp>
-#include <functional> //std::greater
 
 struct available_atom{
     available_atom(std::string residue_index_str, std::string resname, std::string chain_id, std::string atom_name, std::string atom_to_replace){
@@ -52,67 +52,9 @@ struct available_atom{
     std::string residue_index_str_, resname_, chain_id_, atom_name_, atom_to_replace_;
 };
 
-struct response{
-    response(bool valid, bool pdb2glycam_available, std::vector<available_atom> available_atoms, std::vector<std::string> comments){
-        this->is_valid_ = valid;
-		this->pdb2glycam_available_ = pdb2glycam_available;
-		this->available_atoms_ = available_atoms; 
-		this->comments_ = comments;
-    }
-    bool is_valid_ = false;
-    bool pdb2glycam_available_ = false;
-    std::vector<available_atom> available_atoms_;
-    std::vector<std::string> comments_;
-};
 
-typedef std::vector<MolecularModeling::Atom*> AtomVector;
-int main(int argc, char* argv[]){
-    std::string file_path_str = std::string(argv[1]);
-    MolecularModeling::Assembly assemblyA(file_path_str, gmml::InputFileType::PDB); 
-    VinaBondByDistanceForPDB(assemblyA, 0);
-
-    char* gemshome = std::getenv("GEMSHOME");
-    if (!gemshome){
-        std::cout << "GEMSHOME environment variable must be set. Aborting." << std::endl;
-        return 0;
-    }
-    std::string gems_home(gemshome);
-
-    std::string lib1 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/amino12.lib";
-    std::string lib2 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminoct12.lib";
-    std::string lib3 = gems_home + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminont12.lib";
-    std::vector<std::string> amino_libs = {lib1, lib2, lib3};
-
-    std::string prep = gems_home + "/gmml/dat/prep/GLYCAM_06j-1.prep";
-
-    //Valid = have sugars and available open valence positions.
-    bool is_valid = false, pdb2glycam_available = false;
-    std::vector<std::string> comments;
-
-    std::vector<Glycan::Monosaccharide*> monos= std::vector<Glycan::Monosaccharide*>();
-    std::vector<Glycan::Oligosaccharide*> oligos = assemblyA.ExtractSugars(amino_libs,monos,false,false);
-
-    if (oligos.empty()){
-	is_valid = false;
-        comments.push_back("Not elegible for pdb2glycam because no sugars were detected");
-    }
-
-    //Attempt pdb2glycam matching
-    std::map<MolecularModeling::Atom*, MolecularModeling::Atom*> actual_template_atom_match;
-    AtomVector atoms = assemblyA.GetAllAtomsOfAssembly();
-    bool pdb2glycam_successful = pdb2glycam_matching(file_path_str, actual_template_atom_match, atoms, gmml::InputFileType::PDB, amino_libs, prep);
-
-    if (!pdb2glycam_successful){
-        comments.push_back("Pdb2glycam matching failed. Cannot use this feature");
-		pdb2glycam_available = false;
-    }
-    else{
-        pdb2glycam_available = true;
-    }
-
-    //Detect available atoms for derivatization
-    AtomVector side_atoms;
-    std::vector<available_atom> available_atoms;  
+std::vector<available_atom> detect_available_atoms(std::vector<Glycan::Monosaccharide*> monos){
+    std::vector<available_atom> available_atoms = std::vector<available_atom>();
 
     for (unsigned int i = 0; i < monos.size(); i++){
         Glycan::Monosaccharide* mono = monos[i];
@@ -142,8 +84,55 @@ int main(int argc, char* argv[]){
 	    	}
 		}
     }
-	
+
+    return available_atoms;
+}
+
+typedef std::vector<MolecularModeling::Atom*> AtomVector;
+int main(int argc, char* argv[]){
+    // Setup
+    char* _GEMSHOME = std::getenv("GEMSHOME");
+    if (!_GEMSHOME){
+        std::cout << "GEMSHOME environment variable must be set. Aborting." << std::endl;
+        return 0;
+    }
+    std::string GEMSHOME(_GEMSHOME);
+
+    if (argc != 3){
+        std::cout << "Usage: " << argv[0] << " <input_pdb> <output_file>" << std::endl;
+        return 1;
+    }
+    std::string pdb_file_path_str = std::string(argv[1]);
     std::string output_file_path_str = std::string(argv[2]);
+
+    std::string lib1 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/amino12.lib";
+    std::string lib2 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminoct12.lib";
+    std::string lib3 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminont12.lib";
+    std::vector<std::string> amino_libs = {lib1, lib2, lib3};
+    std::string prep = GEMSHOME + "/gmml/dat/prep/GLYCAM_06j-1.prep";
+
+    // Begin Evaluation of the input PDB file
+    MolecularModeling::Assembly assemblyA(pdb_file_path_str, gmml::InputFileType::PDB); 
+    VinaBondByDistanceForPDB(assemblyA, 0);
+
+    // Valid = have sugars and available open valence positions.
+    bool is_valid = false, pdb2glycam_available = false, sugars_detected = false;
+
+    std::vector<Glycan::Monosaccharide*> monos= std::vector<Glycan::Monosaccharide*>();
+    std::vector<Glycan::Oligosaccharide*> oligos = assemblyA.ExtractSugars(amino_libs,monos,false,false);
+
+    if (!oligos.empty()){
+        sugars_detected = true;
+    }
+
+    // Attempt pdb2glycam matching
+    std::map<MolecularModeling::Atom*, MolecularModeling::Atom*> actual_template_atom_match;
+    AtomVector atoms = assemblyA.GetAllAtomsOfAssembly();
+    pdb2glycam_available = pdb2glycam_matching(pdb_file_path_str, actual_template_atom_match, atoms, gmml::InputFileType::PDB, amino_libs, prep);
+
+    // Detect available atoms for derivatization
+    std::vector<available_atom> available_atoms = detect_available_atoms(monos);
+	
 	std::ofstream output_file(output_file_path_str);
 	if (output_file.fail()){
 		std::cout << "Failed to create " << output_file_path_str << " for writing." << std::endl;
@@ -156,15 +145,15 @@ int main(int argc, char* argv[]){
 		//std::cout << "Open for derivatization: " << atom.residue_index_str_ << "-" << atom.atom_name_ << "-" << atom.atom_to_replace_ << std::endl;
 		atom.print_attribute(output_file);
     }
+    output_file << "END" << std::endl;
+    is_valid = !available_atoms.empty() && sugars_detected;
+
+    output_file << std::endl;
+    output_file << "valid_pdb=" << is_valid << std::endl;
+    output_file << "pdb2glycam_available=" << pdb2glycam_available << std::endl;
+    output_file << "sugars_detected=" << sugars_detected << std::endl;
+    output_file << "available_atoms=" << available_atoms.size() << std::endl;
 	output_file.close();
 
-    if (available_atoms.empty()){
-        comments.push_back("No available positions for modification detected. For now must be ring hydroxyl/amino groups");
-		is_valid = false;
-    }
-    else{
-        is_valid = true;
-    }
- 
-    response this_response(is_valid, pdb2glycam_available, available_atoms, comments);
+    return 0;
 }
