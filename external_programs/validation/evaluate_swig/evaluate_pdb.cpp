@@ -1,3 +1,4 @@
+
 #include "evaluate_pdb.hpp"
 #include "includes/gmml.hpp"
 #include "includes/MolecularModeling/assembly.hpp"
@@ -60,11 +61,28 @@ PDBEvaluationResult evaluate_pdb(const std::string& pdb_file_path) {
     }
 
     try {
+        // Check if the file exists and is readable
+        std::ifstream file(pdb_file_path);
+        if (!file) {
+            throw std::runtime_error("Unable to open or read file: " + pdb_file_path);
+        }
+        file.close();
+
         std::string lib1 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/amino12.lib";
         std::string lib2 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminoct12.lib";
         std::string lib3 = GEMSHOME + "/gmml/dat/CurrentParams/leaprc.ff12SB_2014-04-24/aminont12.lib";
         std::vector<std::string> amino_libs = {lib1, lib2, lib3};
         std::string prep = GEMSHOME + "/gmml/dat/prep/GLYCAM_06j-1.prep";
+
+        // Check if all required files exist
+        for (const auto& lib : amino_libs) {
+            if (!std::ifstream(lib)) {
+                throw std::runtime_error("Required library file not found: " + lib);
+            }
+        }
+        if (!std::ifstream(prep)) {
+            throw std::runtime_error("Required prep file not found: " + prep);
+        }
 
         MolecularModeling::Assembly assemblyA(pdb_file_path, gmml::InputFileType::PDB); 
         VinaBondByDistanceForPDB(assemblyA, 0);
@@ -86,8 +104,13 @@ PDBEvaluationResult evaluate_pdb(const std::string& pdb_file_path) {
         is_valid = !available_atoms.empty() && sugars_detected;
 
         return {is_valid, pdb2glycam_available, sugars_detected, available_atoms};
+    } catch (const std::ios_base::failure& e) {
+        throw std::runtime_error("File I/O error: " + std::string(e.what()));
+    } catch (const std::bad_alloc& e) {
+        throw std::runtime_error("Memory allocation failed: " + std::string(e.what()));
     } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
-        throw;
+        throw std::runtime_error("Error in evaluate_pdb: " + std::string(e.what()));
+    } catch (...) {
+        throw std::runtime_error("Unknown error occurred in evaluate_pdb");
     }
 }

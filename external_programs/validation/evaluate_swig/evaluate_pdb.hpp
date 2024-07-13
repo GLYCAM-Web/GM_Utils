@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <stdexcept>
 
 struct available_atom {
     available_atom() = default; // Default constructor

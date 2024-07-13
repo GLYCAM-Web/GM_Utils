@@ -1,0 +1,1 @@
+- ring conformations and pdb2glycam log need to be written to the proper directories.

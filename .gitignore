@@ -5,3 +5,4 @@ pdb2glycam.log
 *.o
 *.so
 evaluate_pdb.py
+evaluate_pdb_wrapped.cxx
