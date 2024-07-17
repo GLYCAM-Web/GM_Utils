@@ -1,0 +1,12 @@
+			Scenario v0.0.1
+
+This package provides functionality for modifying Python objects over the 
+course of time according to a scenario.  A scenario is defined as a set 
+of events taking place at specific times.
+
+A high level description of the package is available in the __init__.py file.
+
+This package requires the discrete events simulation Python package SimPy
+(see http://simpy.sourceforge.net/)
+
+Copyright M. Sanner and TSRI, Nov. 2004

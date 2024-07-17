@@ -1,0 +1,1 @@
+./main.exe corona.mol2 ../test_pdbs/29_ligand.pdb ../test_pdbs/29_pdb2glycam.log gaff.dat frcmod.ff14SB

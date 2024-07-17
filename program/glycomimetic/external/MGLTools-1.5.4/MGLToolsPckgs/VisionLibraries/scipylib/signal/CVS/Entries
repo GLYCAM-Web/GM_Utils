@@ -1,0 +1,18 @@
+/__init__.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/absFFT.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/arange.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/db10FFT.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/db20FFT.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/freqz.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/highPass_Remez.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/lFilter.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/linearChirp.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/lowPass_Remez.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/plotAbsFFT.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/plotdb10FFT.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/sampleChirp.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/sinFunc.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/timeRange.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+/wavePlay.py/1.3/Thu Nov 29 19:58:17 2007/-kkv/Trc-1-5-4
+/waveRead.py/1.1/Wed Nov 28 23:09:08 2007/-kkv/Trc-1-5-4
+D

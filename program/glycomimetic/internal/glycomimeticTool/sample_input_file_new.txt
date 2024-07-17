@@ -1,0 +1,17 @@
+ComplexPdb:1our_receptor.pdbqt
+OpenValence:
+ResidueIndex:301
+LinkageTorsionAtom1:C5
+LinkageTorsionRotatble:True
+TargetAtom:C6
+AtomToReplace:O6
+MoietyLibraryDir:moieties
+PatternToMatch:pdbqt
+AdditionalTorsion:
+301_C4_C5_C6_O6
+302_C4_C5_C6_O6_120
+End
+Interval:30
+NumThreads:4
+OutputPath:output
+LogFile:sample.log

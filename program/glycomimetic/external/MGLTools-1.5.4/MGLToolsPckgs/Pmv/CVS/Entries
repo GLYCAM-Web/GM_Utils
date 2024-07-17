@@ -1,0 +1,72 @@
+/.packager.py/1.16/Thu Dec 18 21:53:19 2003/-kkv/Trc-1-5-4
+/APBSCommands.py/1.158.2.6/Fri Jun 19 17:17:08 2009/-kkv/Trc-1-5-4
+/Grid.py/1.31/Fri Oct  3 19:28:29 2008/-kkv/Trc-1-5-4
+/LICENSE/1.2/Thu Jul  3 20:51:11 2008/-kkv/Trc-1-5-4
+/NucleicBases.py/1.12.2.1/Wed Dec  3 20:50:17 2008/-kkv/Trc-1-5-4
+/RELNOTES/1.9.6.2/Thu Oct 30 20:29:11 2008/-kkv/Trc-1-5-4
+/Ribbon.py/1.14/Fri Oct  3 19:28:29 2008/-kkv/Trc-1-5-4
+/SLCommands.py/1.32/Fri Oct  3 19:28:29 2008/-kkv/Trc-1-5-4
+/__init__.py/1.44.2.3/Fri May 15 17:12:24 2009/-kkv/Trc-1-5-4
+/_pmvrc/1.43.2.2/Fri May  8 18:26:51 2009/-kkv/Trc-1-5-4
+/aboutCommands.py/1.5/Mon Jul 14 21:58:26 2008/-kkv/Trc-1-5-4
+/amberCommands.py/1.42/Tue Dec  4 19:25:54 2007/-kkv/Trc-1-5-4
+/bondsCommands.py/1.47/Fri Oct  3 21:23:54 2008/-kkv/Trc-1-5-4
+/cmdlib.py/1.19/Fri Oct  3 21:02:16 2008/-kkv/Trc-1-5-4
+/coarseMolSurfaceCommands.py/1.25.2.2/Tue Apr 21 00:38:18 2009/-kkv/Trc-1-5-4
+/colorCommands.py/1.128/Fri Jun 20 20:08:08 2008/-kkv/Trc-1-5-4
+/colorMap.py/1.2/Tue Jul 24 17:30:39 2007/-kkv/Trc-1-5-4
+/colorPalette.py/1.9/Mon Oct 16 21:50:15 2006/-kk/Trc-1-5-4
+/colorPaletteCommands.py/1.3/Thu Jun 15 00:36:23 2006/-kk/Trc-1-5-4
+/computeIsovalue.py/1.7/Mon Sep 22 20:06:36 2008/-kkv/Trc-1-5-4
+/controlPanelCommands.py/1.44/Tue Sep 16 17:27:18 2008/-kkv/Trc-1-5-4
+/crystalCommands.py/1.1.2.1/Thu Feb 26 18:15:55 2009/-kkv/Trc-1-5-4
+/dashboard.py/1.26.2.1/Mon Apr 13 22:00:30 2009/-kkv/Trc-1-5-4
+/dashboardCommands.py/1.22.2.1/Thu Apr  9 17:14:36 2009/-kkv/Trc-1-5-4
+/deleteCommands.py/1.47.2.1/Thu Dec 11 20:16:36 2008/-kkv/Trc-1-5-4
+/displayCommands.py/1.186.2.2/Wed Nov 19 21:20:35 2008/-kkv/Trc-1-5-4
+/editCommands.py/1.119.2.1/Wed Apr 15 19:32:16 2009/-kkv/Trc-1-5-4
+/extruder.py/1.31/Wed Oct  3 01:05:13 2007/-kkv/Trc-1-5-4
+/extrusionCommands.py/1.41.2.1/Wed Dec 17 23:13:08 2008/-kkv/Trc-1-5-4
+/fileCommands.py/1.112.2.6/Fri Sep  4 17:34:37 2009/-kkv/Trc-1-5-4
+/genparserCommands.py/1.7/Mon Mar 22 19:29:39 2004/-kkv/Trc-1-5-4
+/gridCommands.py/1.28/Tue Sep 25 22:44:24 2007/-kkv/Trc-1-5-4
+/guiTools.py/1.13/Tue Jan 17 17:24:38 2006/-kkv/Trc-1-5-4
+/hbondCommands.py/1.90.2.1/Fri Apr 24 16:40:59 2009/-kkv/Trc-1-5-4
+/helpCommands.py/1.22/Thu Jul 24 22:55:49 2008/-kkv/Trc-1-5-4
+/interactiveCommands.py/1.29/Fri Jan 26 01:37:41 2007/-kkv/Trc-1-5-4
+/labelCommands.py/1.65/Fri Jul 25 20:16:57 2008/-kkv/Trc-1-5-4
+/measureCommands.py/1.45/Fri Oct  3 21:02:16 2008/-kkv/Trc-1-5-4
+/modlib.py/1.17/Wed Jan 19 22:50:11 2005/-kkv/Trc-1-5-4
+/moleculeViewer.py/1.160.2.7/Thu May 14 18:33:53 2009/-kkv/Trc-1-5-4
+/msExposureCommands.py/1.2/Wed Oct  1 19:11:27 2008/-kkv/Trc-1-5-4
+/msmsCommands.py/1.131.2.1/Wed Nov 19 00:17:54 2008/-kkv/Trc-1-5-4
+/msmsParser.py/1.9/Tue Jul 24 17:30:39 2007/-kkv/Trc-1-5-4
+/mvCommand.py/1.43.4.1/Wed Mar 11 00:22:02 2009/-kkv/Trc-1-5-4
+/picker.py/1.4/Fri Dec 17 19:21:23 2004/-kkv/Trc-1-5-4
+/pmvPalettes.py/1.3.12.2/Tue May 12 23:14:54 2009/-kkv/Trc-1-5-4
+/povrayCommands.py/1.5/Tue Sep 16 17:27:18 2008/-kkv/Trc-1-5-4
+/qkollRes.py/1.1/Wed Aug  8 18:26:18 2001/-kkv/Trc-1-5-4
+/qkollua.py/1.7/Mon Sep 29 18:27:36 2003/-kkv/Trc-1-5-4
+/repairCommands.py/1.77/Fri Oct  3 21:23:54 2008/-kkv/Trc-1-5-4
+/sdCommands.py/1.79/Fri Oct  3 21:23:54 2008/-kkv/Trc-1-5-4
+/secondaryStructureCommands.py/1.95.2.6/Thu Sep 10 18:15:19 2009/-kkv/Trc-1-5-4
+/selectionCommands.py/1.135.2.3/Mon Nov 24 21:05:17 2008/-kkv/Trc-1-5-4
+/setangleCommands.py/1.39.2.2/Thu Jun 11 23:01:19 2009/-kkv/Trc-1-5-4
+/splineCommands.py/1.51.4.1/Wed Dec 17 23:13:08 2008/-kkv/Trc-1-5-4
+/stringSelectorGUI.py/1.15/Tue Jul 24 17:30:39 2007/-kkv/Trc-1-5-4
+/superImposeCommands.py/1.23/Wed Nov 28 00:19:46 2007/-kkv/Trc-1-5-4
+/superimposeCommandsNew.py/1.14/Tue Sep 16 17:27:18 2008/-kkv/Trc-1-5-4
+/traceCommands.py/1.30/Fri Oct  3 19:28:29 2008/-kkv/Trc-1-5-4
+/trajectoryCommands.py/1.14/Tue Sep 16 17:27:19 2008/-kkv/Trc-1-5-4
+/updateCommands.py/1.6/Thu Jun 21 19:38:37 2007/-kkv/Trc-1-5-4
+/vectfieldCommands.py/1.13/Mon Dec  3 19:17:15 2007/-kkv/Trc-1-5-4
+/videoCommands.py/1.4/Wed Mar 14 21:50:12 2007/-kkv/Trc-1-5-4
+/visionCommands.py/1.53.4.1/Fri Nov  7 18:31:19 2008/-kkv/Trc-1-5-4
+/writeMsmsAsCommands.py/1.6/Wed Dec 27 18:27:00 2006/-kkv/Trc-1-5-4
+D/Icons////
+D/Macros////
+D/Tests////
+D/VisionInterface////
+D/bin////
+D/data////
+D/doc////

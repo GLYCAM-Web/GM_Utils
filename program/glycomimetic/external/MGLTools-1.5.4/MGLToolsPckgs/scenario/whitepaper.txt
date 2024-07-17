@@ -1,0 +1,37 @@
+Scenario is a software component for animating python objects.
+
+It can be used to create 3D animation when associated with a 3D visualization software component such as DejaVu, or more generally to modify any Python object over the course of time. For instance it can drive parameters in  a Vision network over time.
+It support both keyframe and procedural animations.
+
+Actors are object that evolve values over the course of time and configure a Python object according to the value at a given point in time. For instance an actor can be created to modify the radius/radii of a set of spheres in a Sphere geometry from the DejaVu software component. The time span over which the value is actually changing is called an Action. Actor can contain multiple Actions and each action can either span 2 or more keyframes and interpolate between then, or contain no keyframe and be procedurale. Actions can be named.
+
+Actors contain KeyframeValues obects which are sets of valid values (i.e. values that can be used to configure the Python object) for an actor. 
+KeyframeValues can optionally be named. 
+KeyframeValues can be associated with a specific frame on the time line to become a Keyframe. This dissociation between the values (KeyframeValues) and the actual Keyframe (Values at a given time) allows the reuse of the same KeyframeValues in multiple points in time. We call such re-used values chimeras. Unlike explicite copied of Keyframes, chimeras will be sensitive to modifications in the original KeyframeValues.
+
+Values are interpolated between Keyframes. At every Keyframe on the timeline an Interpolators can be specified. This interpolator will apply from this point in time to the end of the action, or a subsequent Keyframe specifies another interpolator.
+
+
+User Interface:
+
+Acors can be turned on and off for reading (i.e. sending values when the read head moves) and recording (when new keyframes are recorded)
+Keyframes can be created individually for for a given actor at a point in time
+Multiples Keyframes can be selected, grouped and names, deleted, copied, or a chimera copy can be made.
+When a keyframe is created it will be connected to the Keyframe to its left by an action. An segment of an action (i.e. between 2 Keyframes) can be delete to prevent interpolation between these 2 Keyframes. This splits an action into 2.
+Actions can be resized by dragging the end, but will snap to keyframes
+Keyframes can be moved.
+
+
+Desired Features:
+jump to next keyframe
+move keyframe and move other keyframes in action
+move head without sending values
+
+Keyframes can be moved with the option of moving the
+Actions can be dragged 
+
+ that are set of valid values for this actor with an optional name. These keyframes can be placed on a timeline to force the values 
+
+It provides objects called actors that allow to carry out tasks over the course of time. 
+
+ of Python object over time where animating a python object means modifying 

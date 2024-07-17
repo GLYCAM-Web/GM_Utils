@@ -1,0 +1,3 @@
+installPath=/programs/glycomimetic/
+AMBERHOME=/cm/shared/apps/amber20/ 
+GEMSHOME=/programs/gems/yao

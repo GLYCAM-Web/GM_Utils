@@ -1,0 +1,6 @@
+#!/mgl/python/releases/i86Linux2/python2.5/bin/python
+# -*- coding: utf-8 -*-
+"""Simple wrapper around PyColorize, which colorizes python sources."""
+
+import IPython.PyColorize
+IPython.PyColorize.main()

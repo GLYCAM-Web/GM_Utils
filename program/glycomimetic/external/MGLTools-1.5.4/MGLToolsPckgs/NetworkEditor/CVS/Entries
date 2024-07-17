@@ -1,0 +1,19 @@
+/.packager.py/1.11/Thu Dec 18 21:50:56 2003/-kkv/Trc-1-5-4
+/Editor.py/1.81/Fri Jul 20 18:37:01 2007/-kkv/Trc-1-5-4
+/Glyph.py/1.1/Thu Aug 30 20:00:49 2007/-kk/Trc-1-5-4
+/LICENSE/1.4/Thu Jul  3 20:50:40 2008/-kkv/Trc-1-5-4
+/RELNOTES/1.17.6.2/Thu Oct 30 21:04:36 2008/-kkv/Trc-1-5-4
+/__init__.py/1.14/Mon Sep 24 19:42:44 2007/-kkv/Trc-1-5-4
+/customizedWidgets.py/1.11/Mon Dec  3 20:07:27 2007/-kkv/Trc-1-5-4
+/datatypes.py/1.70/Thu Jan 31 00:17:21 2008/-kkv/Trc-1-5-4
+/flow.py/1.20/Fri Jun  2 19:06:23 2006/-kkv/Trc-1-5-4
+/gridEditor.py/1.6/Tue Aug 24 23:10:01 2004/-kkv/Trc-1-5-4
+/itemBase.py/1.98/Mon Oct 13 19:30:33 2008/-kkv/Trc-1-5-4
+/items.py/1.331/Fri Oct 10 21:14:24 2008/-kkv/Trc-1-5-4
+/macros.py/1.89.2.1/Fri Nov  7 18:31:21 2008/-kkv/Trc-1-5-4
+/net.py/1.264/Thu Oct 23 22:15:02 2008/-kkv/Trc-1-5-4
+/ports.py/1.177/Fri Oct 10 21:14:24 2008/-kkv/Trc-1-5-4
+/simpleNE.py/1.216.2.2/Sat Nov 15 00:36:48 2008/-kkv/Trc-1-5-4
+/widgets.py/1.189.2.1/Wed Apr  8 23:31:37 2009/-kkv/Trc-1-5-4
+D/Tests////
+D/regression////
