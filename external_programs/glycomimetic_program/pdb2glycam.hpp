@@ -28,7 +28,6 @@
 #include <iterator>
 
 std::map<std::string, int> max_neighbors_lookup_map = {{"C", 4}, {"N-nonterminal", 3}, {"N-terminal", 4}};
-std::ofstream pdb2glycam_log("pdb2glycam.log");
 
 bool is_terminal(MolecularModeling::Atom* atom){
     int num_heavy_atom_neighbors = 0;
@@ -62,7 +61,7 @@ int DetermineMaxNeighborsCount(MolecularModeling::Atom* atom){
     return -1;
 }
 
-void RemoveExtraHydrogensFromCarbon(MolecularModeling::Assembly& assembly){
+void RemoveExtraHydrogensFromCarbon(MolecularModeling::Assembly& assembly, std::ofstream pdb2glycam_log){
     AtomVector assembly_atoms = assembly.GetAllAtomsOfAssembly();
 
     for (unsigned int i = 0; i < assembly_atoms.size(); i++){
@@ -140,7 +139,10 @@ void RemoveExtraHydrogensFromCarbon(MolecularModeling::Assembly& assembly){
 bool pdb2glycam_matching(std::string file_path, std::map<MolecularModeling::Atom*, MolecularModeling::Atom*>& actual_template_atom_match, AtomVector& actual_atoms, gmml::InputFileType file_type,
 		         std::vector<std::string>& amino_libs, std::string prep)
 {
-    //pdb2glycam
+    std::string parent_dir = file_path.substr(0, file_path.find_last_of("/\\"));
+    std::string pdb2glycam_log_path = parent_dir + "/pdb2glycam.log";
+    std::ofstream pdb2glycam_log(pdb2glycam_log_path.c_str());
+
     pdb2glycam_log << "Begin pdb2glycam" << std::endl;
 
     MolecularModeling::Assembly assemblyA(file_path, file_type);
